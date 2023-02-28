@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      let root = document.getElementById("root");
+
+      let heading = document.createElement("h1");
+
+      heading.textContent = "Hello World!";
+
+      heading.className = "text-xl";
+
+      let paragraph = document.createElement("p");
+
+      paragraph.textContent = `Welcome to this session!`;
+
+      let fragment = new DocumentFragment();
+
+      fragment.append(heading);
+      fragment.append(paragraph);
+
+      root.append(fragment);
+    </script>
+  </body>
+</html>
