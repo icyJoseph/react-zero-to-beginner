@@ -1,0 +1,27 @@
+{
+  "abilities": [
+    {
+      "ability": {
+        "name": "synchronize",
+        "url": "https://pokeapi.co/api/v2/ability/28/"
+      },
+      "is_hidden": false,
+      "slot": 1
+    }
+  ],
+  "base_experience": 300,
+  "height": 4,
+  "id": 151,
+  "name": "mew",
+  "past_types": [],
+  "species": {
+    "name": "mew",
+    "url": "https://pokeapi.co/api/v2/pokemon-species/151/"
+  },
+  "sprites": {
+    "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png"
+  },
+
+  "description": "So rare that it is still said to be a mirage by many experts. Only a few people have seen it worldwide.",
+  "weight": 40
+}
