@@ -175,6 +175,38 @@ They are literally a hook into React's core, which allows us to describe
 the UI, and let React figure out what state applies to a given component
 instance at any given time.
 
+## Components
+
+A component is a way to hide implementation details.
+
+Think of a Button component:
+
+```jsx
+<Button className="btn" />
+
+<Button className="btn btn--primary" />
+
+<Button type="disabled" className="btn btn--disabled" />
+```
+
+All of these attributes are implementation details. They are only
+important for the producer of this component.
+
+As the consumer of a component:
+
+```jsx
+<Button />
+<Button variant="primary" />
+<Button disabled />
+```
+
+As the user of a component, the type, class name are details
+that have less importance, the value of a component is that
+it behaves as your design system defines it.
+
+The implementation might switch to use `float`, `flex`, `grid`,
+for the user of a component it shouldn't matter.
+
 ## Can we see what's React really doing?
 
 - https://codesandbox.io/s/currying-morning-m1oop
@@ -191,10 +223,121 @@ Let's try to re-implement the missing parts.
 
 1. Get the list of dogs for the selector
 2. On `Fetch!`, replace the dog image
+3. If no breed is selected, disable the button
+4. Let's talk about cancelling async work
+
+#### How to fetch data?
+
+```jsx
+import { useState, useEffect } from 'react';
+import { fetchBio } from './api.js';
+
+export default function Page() {
+  const [person, setPerson] = useState('Alice');
+  const [bio, setBio] = useState(null);
+
+  useEffect(() => {
+    let ignore = false;
+    setBio(null);
+    fetchBio(person).then(result => {
+      if (!ignore) {
+        setBio(result);
+      }
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [person]);
+
+  // ...
+```
+
+#### How to work with inputs in React?
+
+- https://www.joshwcomeau.com/react/data-binding/
+
+Snippet taken from: https://www.joshwcomeau.com/react/data-binding/#select-12
+
+```jsx
+import { useState } from "react";
+
+function App() {
+  const [age, setAge] = useState("0-18");
+
+  return (
+    <>
+      <form>
+        <label htmlFor="age-select">How old are you?</label>
+
+        <select
+          id="age-select"
+          value={age}
+          onChange={(event) => {
+            setAge(event.target.value);
+          }}
+        >
+          <option value="0-18">18 and under</option>
+          <option value="19-39">19 to 39</option>
+          <option value="40-64">40 to 64</option>
+          <option value="65-infinity">65 and over</option>
+        </select>
+      </form>
+
+      <p>
+        <strong>Selected value:</strong>
+        {age}
+      </p>
+    </>
+  );
+}
+
+export default App;
+```
 
 ### Card component
 
-CSS Modules and Styled Components.
+Given two components that share some similarities, create
+a common component called Card, which collects some of these
+similarities.
 
 #### Styled Components
 
+A CSS-in-JS solution. Together with emotion, these are probably the most
+used in production deploys.
+
+The idea is to bind the styling to the component, be it an HTML tag, or
+a React Component.
+
+This way we:
+
+- Scoped CSS
+- Get rid of the need to map CSS-to-HTML
+- The style lives with the component
+- Hide implementation details
+
+This makes turns CSS into a powerful tool to be safely used within a component system.
+
+- It is just CSS
+- We like CSS!
+
+```jsx
+// Create a Title component that'll render an <h1> tag with some styles
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+// Create a Wrapper component that'll render a <section> tag with some styles
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`;
+
+// Use Title and Wrapper like any other React component – except they're styled!
+render(
+  <Wrapper>
+    <Title>Hello World!</Title>
+  </Wrapper>
+);
+```
