@@ -176,11 +176,11 @@ const App = () => (
 );
 ```
 
-HoCs were great, but required us to wrap an entire component to be able 
+HoCs were great, but required us to wrap an entire component to be able
 to inject our logic.
 
 ```js
-export default withAuth(withUser(withOrders(MyPage)))
+export default withAuth(withUser(withOrders(MyPage)));
 ```
 
 Render Props could target specific parts of the JSX, but created
@@ -196,7 +196,7 @@ complexity as soon as more than one behavior had to be reused.
 </RenderWithAuth>
 ```
 
-Anything that can be made with HoCs, can be made with Render props, and 
+Anything that can be made with HoCs, can be made with Render props, and
 in turn, those things can be made with Hooks.
 
 ## Hooks
@@ -213,18 +213,18 @@ instance at any given time.
 
 ```jsx
 const useCounter = (initial = 0) => {
-  const [value, setValue] = useState(initial)
-  const inc = () => setValue(prev => prev + 1)
-  const dec = () => setValue(prev => prev - 1)
+  const [value, setValue] = useState(initial);
+  const inc = () => setValue((prev) => prev + 1);
+  const dec = () => setValue((prev) => prev - 1);
 
-  return {count: value, inc, dec}
-}
+  return { count: value, inc, dec };
+};
 
-const RenderWithCount = ({initial = 0, children}) => {
-  const {count, inc, dec} = useCounter(0)
-  
-  return children({count, inc, dec})
-}
+const RenderWithCount = ({ initial = 0, children }) => {
+  const { count, inc, dec } = useCounter(0);
+
+  return children({ count, inc, dec });
+};
 
 const WithCount = (Component) => {
   const Enhanced = (props) => {
@@ -247,7 +247,6 @@ const WithCount = (Component) => {
 
   return Enhanced;
 };
-
 ```
 
 > https://usehooks.com/
@@ -422,3 +421,5 @@ render(
 ```
 
 > https://www.joshwcomeau.com/react/demystifying-styled-components/
+
+![CSS-in-JS](/css-in-js.jpg "CSS in JS")

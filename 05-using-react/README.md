@@ -9,7 +9,7 @@ lift the state up to the closest common parent.
 
 Why wouldn't we just put everything together? We would lose component isolation.
 
-When the application complexity grows too much, or the common parent is the root 
+When the application complexity grows too much, or the common parent is the root
 of the application, we should start to use a global state management solution.
 
 > Data flows from parents to children
@@ -18,7 +18,7 @@ of the application, we should start to use a global state management solution.
 
 If state can be moved down to children, do it. That is place state where it belongs.
 
-Usually when we develop a feature, we hold state at one place, and make sure everything works fine. 
+Usually when we develop a feature, we hold state at one place, and make sure everything works fine.
 However, when we start to refactor our components, too often we fallback to use props, rather
 than moving state into the components that need it.
 
@@ -40,19 +40,18 @@ Typically, to avoid prop-drilling, we can either use:
 
 ```js
 const createFunction = () => {
-    const fn = () => {}
-    return fn
-}
+  const fn = () => {};
+  return fn;
+};
 
-console.log(createFunction() === createFunction()) // ?
-console.log({} === {}) //
-console.log([] === []) //
+console.log(createFunction() === createFunction()); // ?
+console.log({} === {}); //
+console.log([] === []); //
 ```
 
 ## A primer on Patterns
 
 > https://reactpatterns.com/, a whole bunch of JavaScript + React patterns
-
 
 ### Reducer
 
@@ -100,18 +99,20 @@ const Counter = ({ initial = 0 }) => {
 - Presentational: Closer to the DOM, these are controlled by props.
 
 ```tsx
-import Avatar from 'design-system/avatar'
-import useUser from 'swr/use-user'
+import Avatar from "design-system/avatar";
+import useUser from "swr/use-user";
 
 export default function Profile({ id }) {
-  const { user, loading } = useUser(id)
+  const { user, loading } = useUser(id);
 
-  if (loading) return <Spinner />
+  if (loading) return <Spinner />;
 
-  return <>
-    <Avatar src={user.pic}/>
-    <h1>{user.name}</h1>
-  </>
+  return (
+    <>
+      <Avatar src={user.pic} />
+      <h1>{user.name}</h1>
+    </>
+  );
 }
 ```
 
@@ -127,15 +128,15 @@ React becomes the single source of truth for the value of an input
 
 ```tsx
 function AllCaps() {
-  const [capitalizedValue, setCapitalizedValue] = useState('')
+  const [capitalizedValue, setCapitalizedValue] = useState("");
 
   return (
     <input
       type="text"
       value={capitalizedValue}
-      onChange={e => setCapitalizedValue(e.target.value.toUpperCase())}
+      onChange={(e) => setCapitalizedValue(e.target.value.toUpperCase())}
     />
-  )
+  );
 }
 ```
 
@@ -146,7 +147,7 @@ needed to "see" the value of `input`, we would need to swap it to
 a controlled input.
 
 ```tsx
-import {useId} from 'react';
+import { useId } from "react";
 
 function Form() {
   const id = useId();
@@ -171,12 +172,12 @@ function Form() {
 ### Prop getters
 
 This pattern is used to help us gain access to custom behavior, or attributes
-that we want to enforce on our components, while still leaving room for us 
+that we want to enforce on our components, while still leaving room for us
 to define how the markup should look like.
 
 ```tsx
-import {useRef} from 'react';
-import {useButton} from 'react-aria';
+import { useRef } from "react";
+import { useButton } from "react-aria";
 
 function Button(props) {
   const ref = useRef();
@@ -195,13 +196,11 @@ function Button(props) {
 
 - https://frontendmastery.com/posts/the-new-wave-of-react-state-management/
 
-
 ### Signals, a new kid on the block
 
 - https://preactjs.com/blog/introducing-signals/
 - https://blog.axlight.com/posts/demystifying-create-react-signals-internals/
 - https://dev.to/this-is-learning/the-evolution-of-signals-in-javascript-8ob
-
 
 ## Exercise
 

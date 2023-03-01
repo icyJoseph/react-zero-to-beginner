@@ -89,7 +89,6 @@ Depending on the important SEO presence for a business, this might be a deal bre
 
 Visit these pages, using a browser and other type of HTTP clients
 
-
 - https://hidden-attribute.surge.sh/
 - https://next-js-react-gbg.vercel.app/
 - https://lethal-crayon.surge.sh/

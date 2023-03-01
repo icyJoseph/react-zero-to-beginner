@@ -95,7 +95,7 @@ during development.
 
 - https://www.innoq.com/en/articles/2021/12/what-does-a-bundler-actually-do/
 - https://snipcart.com/blog/javascript-module-bundler
-- https://lihautan.com/what-is-module-bundler-and-how-does-it-work/ 
+- https://lihautan.com/what-is-module-bundler-and-how-does-it-work/
 
 ## SWC, esbuild
 
