@@ -1,0 +1,37 @@
+{
+  "name": "testing-react-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest --watch=false",
+    "test:watch": "vitest",
+    "test:cov": "vitest run --coverage"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swr": "^2.0.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/react-hooks": "8.0.1",
+    "@testing-library/user-event": "14.4.3",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "@vitest/coverage-c8": "^0.29.2",
+    "jsdom": "21.1.0",
+    "msw": "^1.1.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0",
+    "vitest": "0.29.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}
