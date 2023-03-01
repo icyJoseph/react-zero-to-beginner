@@ -129,6 +129,8 @@ const withGitHub = (Component) => {
       return <Component {...this.props} github={github} />;
     }
   }
+
+  return WithGitHubData;
 };
 
 const Profile = ({ title, github }) => <h1 title={title}>{github.login}</h1>;
@@ -148,22 +150,54 @@ However, sharing business logic with classes was not trivial.
 
 So, we came up with Render Props.
 
+> Functions as children!
+
 ```jsx
-// render props
+class RenderWithGitHub extends React.Component {
+  state = { github: null };
+
+  componentDidMount() {
+    fetchGitHubData().then((data) => this.setState(data));
+  }
+
+  render() {
+    if (!github) return <div>Loading...</div>;
+
+    return this.props.children({ github });
+  }
+}
+
+const App = () => (
+  <main>
+    <RenderWithGitHub>
+      {({ github }) => <GitHubProfile title="Dev" github={github} />}
+    </RenderWithGitHub>
+  </main>
+);
 ```
 
-HoCs were great, but required us to wrap
-an entire component to be able to inject our logic.
+HoCs were great, but required us to wrap an entire component to be able 
+to inject our logic.
+
+```js
+export default withAuth(withUser(withOrders(MyPage)))
+```
 
 Render Props could target specific parts of the JSX, but created
 complexity as soon as more than one behavior had to be reused.
 
-Anything that can be made with HoCs, can be made with Render props, a
-nd in turn, those things can be made with Hooks.
-
 ```jsx
-// HoCs, render-props, hooks
+<RenderWithAuth>
+  {({ auth }) => (
+    <RenderWithGitHub auth={auth}>
+      {({ github }) => <GitHubProfile title="Dev" github={github} />}
+    </RenderWithGitHub>
+  )}
+</RenderWithAuth>
 ```
+
+Anything that can be made with HoCs, can be made with Render props, and 
+in turn, those things can be made with Hooks.
 
 ## Hooks
 
@@ -174,6 +208,49 @@ Hooks only work in Function components.
 They are literally a hook into React's core, which allows us to describe
 the UI, and let React figure out what state applies to a given component
 instance at any given time.
+
+> Default function parameters! https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+
+```jsx
+const useCounter = (initial = 0) => {
+  const [value, setValue] = useState(initial)
+  const inc = () => setValue(prev => prev + 1)
+  const dec = () => setValue(prev => prev - 1)
+
+  return {count: value, inc, dec}
+}
+
+const RenderWithCount = ({initial = 0, children}) => {
+  const {count, inc, dec} = useCounter(0)
+  
+  return children({count, inc, dec})
+}
+
+const WithCount = (Component) => {
+  const Enhanced = (props) => {
+    return (
+      <RenderWithCount>
+        {(countState) => <Component {...props} {...countState} />}
+      </RenderWithCount>
+    );
+  };
+
+  return Enhanced;
+};
+
+// or
+const WithCount = (Component) => {
+  const Enhanced = (props) => {
+    const countState = useCounter(props.initial);
+    return <Component {...props} {...countState} />;
+  };
+
+  return Enhanced;
+};
+
+```
+
+> https://usehooks.com/
 
 ## Components
 
@@ -206,6 +283,8 @@ it behaves as your design system defines it.
 
 The implementation might switch to use `float`, `flex`, `grid`,
 for the user of a component it shouldn't matter.
+
+> Instead of re-using class names through out the app, we want to re-use components
 
 ## Can we see what's React really doing?
 
@@ -341,3 +420,5 @@ render(
   </Wrapper>
 );
 ```
+
+> https://www.joshwcomeau.com/react/demystifying-styled-components/
