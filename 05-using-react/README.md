@@ -2,6 +2,24 @@
 
 - Cheatsheet: https://github.com/typescript-cheatsheets/react
 
+## Development and Production
+
+In development mode React includes a lot more debugging information
+than it does in production mode.
+
+In development mode one can also use StrictMode which makes React run
+pure work, twice. Since pure work is by definition free of side-effects,
+this helps us catch bugs that'd otherwise be really hard to figure out.
+
+However, it is no silver bullet.
+
+### React DevTools
+
+There's a browser extension, which you can use to debug your application
+both in devevelopment and production.
+
+- https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
+
 ## Lifting state
 
 If two components need to share state, the go-to technique is to
@@ -122,6 +140,9 @@ export default function Profile({ id }) {
 
 ### Forms: Controlled vs Uncontrolled
 
+A component should not go back and forth between uncontrolled
+and controlled modes. React will print a warning about this.
+
 #### Controlled Input
 
 React becomes the single source of truth for the value of an input
@@ -195,6 +216,33 @@ function Button(props) {
 ## Global State Management 101
 
 - https://frontendmastery.com/posts/the-new-wave-of-react-state-management/
+
+As the application grows we start to see the following issues, regardless
+of framework, but let's zoom in React-like apps:
+
+- Various components across the app require the same data
+- Composition starts to forbid DRY code
+- We make too much DRY code
+- Prop drilling makes the app stiff
+- Small changes in state can lead to massive re-render cycles
+- We need to consume and mutate loads of server data
+- Harder to keep up big design changes
+- Several people contribute to the project
+
+This is when a Global State Management tool comes in handy.
+
+In general these try to create a dependency tree, that sits on top of a
+small state piece, often called atom.
+
+From atoms, various forms of derived data can be generated, and read
+anywhere in the application. The state manager takes care of re-rendering
+only the pieces that have changed.
+
+This helps us keep various parts of the UI flexible, we can read state right
+where it is needed, knowing that we won't be penalized with performance dips.
+
+We can place our business logic within the state manager, and just use
+React to render UI.
 
 ### Signals, a new kid on the block
 
