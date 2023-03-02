@@ -458,4 +458,4 @@ render(
 
 > https://www.joshwcomeau.com/react/demystifying-styled-components/
 
-![CSS-in-JS](css-in-js.jpg "CSS in JS")
+<img src="css-in-js.jpg" alt="CSS in JS" width="500" >
