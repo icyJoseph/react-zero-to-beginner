@@ -2,14 +2,16 @@ import { graphql, rest } from "msw";
 import { API_URL, IMAGE_URL } from "../config";
 import base64Image from "./nyancat.png";
 
+export const CREATED_AT = "2015-11-06T18:36:54.148Z";
+
 export const catHandler = rest.get(API_URL, (req, res, ctx) =>
   res(
     ctx.status(200),
     ctx.json([
       {
-        id: "catId",
+        _id: "catId",
         owner: "Joe Doe",
-        created_at: "2015-11-06T18:36:54.148Z",
+        createdAt: CREATED_AT,
         tags: ["mockedTag1", "mockedTag2"],
       },
     ])
@@ -39,7 +41,7 @@ export const ghUserGQL = github.query("User", (req, res, ctx) => {
       user: {
         bio: "",
         company: "@gittub",
-        name: "The Mocktocat",
+        name: "Octocat",
         repositories: {
           nodes: [
             {

@@ -4,7 +4,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { vi } from "vitest";
 
-import { handlers } from "../mocks/handlers";
+import { handlers, CREATED_AT } from "../mocks/handlers";
 import { CatPage } from "../components/Cat";
 import { API_URL } from "../config";
 
@@ -40,13 +40,13 @@ describe("Cats", () => {
 
     expect(screen.getByText("Loading cats...")).toBeInTheDocument();
 
-    await waitFor(() => expect(screen.getByText("catId")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByRole("heading")).toHaveTextContent(CREATED_AT)
+    );
 
     expect(screen.getByText("mockedTag1")).toBeInTheDocument();
 
-    expect(handlerCalled.mock.calls.flat()).toEqual([
-      "GET: https://cataas.com/api/cats",
-    ]);
+    expect(handlerCalled.mock.calls.flat()).toEqual([`GET: ${API_URL}`]);
   });
 
   it("should handle network errors", async () => {
