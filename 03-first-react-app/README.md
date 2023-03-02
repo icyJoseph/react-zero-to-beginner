@@ -321,6 +321,8 @@ for the user of a component it shouldn't matter.
 > Instead of re-using class names through out the app,
 > we want to re-use components
 
+- My humble take on modern CSS: https://github.com/icyJoseph/css-lightning-talk
+
 ## Can we see what's React really doing?
 
 - https://codesandbox.io/s/currying-morning-m1oop
