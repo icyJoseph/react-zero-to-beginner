@@ -63,6 +63,8 @@ A React component:
 const App = () => <div>Million dollar app!</div>;
 ```
 
+> We never really call `App()`, rather we say `<App />`
+
 ## Rendering, and Browser paint
 
 When React does a so called render, it calls the function that describes
@@ -103,6 +105,39 @@ This description is compared with the current UI.
 If there's any changes that require changes to the DOM, React executes them.
 
 - https://web.dev/rendering-performance/#the-pixel-pipeline
+
+### MVC?
+
+React came out of Facebook's need to scale quickly. When it was open sourced
+the community rejected it. The ads platform, messenger, Instagram, are all
+billion dollar projects that rode the React wave.
+
+What was the problem with the MVC frameworks of the age? They relied on
+on mutable shared state, and to be consistent, did computationally expensive
+checks, and validations.
+
+Well that React was the living proof that mutable shared state was not as
+fast as an immutable approach.
+
+This goes hand in hand with the progress made in JavaScript engines. Initially
+the Facebook open source team was not very good at selling React, and it was hated.
+
+However, as they studied what they had actually done, and talked to people from
+outside the Facebook organization, they saw they had made a functional UI framework.
+
+We as developers work with immutable data, heavily using reference equality,
+React does all of the dirty DOM mutations to reconcile state with what's painted
+in the browser.
+
+It was easy to attack this idea, by saying that abusing references, and working
+with immutable data structures, would be slow because of garbage collection,
+or it would eat up more RAM than needed.
+
+When compared with Backbone.js and other MVCs of the time, React and other tools
+build on top, or forked from React, were always faster. Even when MVCs apps were
+optimized by developers, an out of the box React app did better.
+
+The battle is still raging though.
 
 ## Classes, HoCs and Render Props
 
@@ -283,7 +318,8 @@ it behaves as your design system defines it.
 The implementation might switch to use `float`, `flex`, `grid`,
 for the user of a component it shouldn't matter.
 
-> Instead of re-using class names through out the app, we want to re-use components
+> Instead of re-using class names through out the app,
+> we want to re-use components
 
 ## Can we see what's React really doing?
 
@@ -422,4 +458,4 @@ render(
 
 > https://www.joshwcomeau.com/react/demystifying-styled-components/
 
-![CSS-in-JS](/css-in-js.jpg "CSS in JS")
+![CSS-in-JS](css-in-js.jpg "CSS in JS")
