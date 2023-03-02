@@ -32,6 +32,11 @@ There are several reason for JavaScript's success:
 
 - Day 1 AoC 2022
 
+Make sure to appreciate:
+
+- Functions as first class citizens
+- Functional style
+
 ## JavaScript toolbox
 
 - Statements and expressions
