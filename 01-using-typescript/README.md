@@ -274,3 +274,5 @@ unknown // we don't know the type,
 
 - Type the User object
 - Create `enumerate` function
+
+> Run `tsc` in the terminal
