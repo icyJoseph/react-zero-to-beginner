@@ -36,7 +36,7 @@ For a workshop, we could boil it down to two reasons:
 - Good products
   - TypeScript
   - VSCode
-- American Markering
+- American Marketing
 
 Facebook's Flow was did not catch on, it was scoped mostly to Facebook Open Source
 products, and there was no killer app to promote its usage.

@@ -16,11 +16,10 @@ const foo = () => {};
 
 Babel would compile/transpile into:
 
-```
+```js
 "use strict";
 
 var foo = function foo() {};
-
 ```
 
 Because IE11 doesn't support arrow functions.
@@ -84,7 +83,7 @@ var foo = function () {};
 All of the code we write, has to ultimately, be put together, so that a browser
 can understand how to run our application.
 
-That's what these tools do. They make sure that all of our code hiearchy is respected.
+That's what these tools do. They make sure that all of our code hierarchy is respected.
 
 Babel/TypeScript would output files that browsers can understand, but there's nothing
 to glue everything together.

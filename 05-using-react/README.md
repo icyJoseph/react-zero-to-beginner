@@ -16,7 +16,7 @@ However, it is no silver bullet.
 ### React DevTools
 
 There's a browser extension, which you can use to debug your application
-both in devevelopment and production.
+both in development and production.
 
 - https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
 
