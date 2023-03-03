@@ -410,6 +410,10 @@ function App() {
 export default App;
 ```
 
+#### Pitfalls of updating Arrays
+
+- https://pavi2410.me/blog/dont-use-usestate-to-handle-arrays-in-react
+
 ### Card component
 
 Given two components that share some similarities, create
