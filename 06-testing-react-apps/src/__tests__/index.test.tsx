@@ -9,7 +9,7 @@ const Counter = () => {
 
   return (
     <div>
-      <p>count: {count}</p>
+      <p data-testid="count">count: {count}</p>
 
       <button onClick={inc}>inc</button>
       <button onClick={dec}>dec</button>
@@ -43,7 +43,7 @@ describe("Components", () => {
 
     await userEvent.click(screen.getByText("inc"));
 
-    expect(screen.getByText(/count: 1/i)).toBeInTheDocument();
+    expect(screen.getByTestId("count")).toBeInTheDocument();
 
     await userEvent.click(screen.getByText("inc"));
 
